@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link th:href="@{/css/app.css}" rel="stylesheet" />
+</head>
+<body>
+    <h1 th:text="${customer.name}"></h1>
+    <span th:text="${customer.email}"></span>
+</body>
+</html>

@@ -2,5 +2,5 @@ select
     /*%expand*/*
 from
     customer
-order by
-    id desc
+where
+    id = /* id */1

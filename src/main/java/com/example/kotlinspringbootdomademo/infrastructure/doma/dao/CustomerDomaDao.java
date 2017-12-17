@@ -12,4 +12,7 @@ import java.util.List;
 public interface CustomerDomaDao {
     @Select
     List<CustomerDomaEntity> selectAll();
+
+    @Select
+    CustomerDomaEntity selectById(int id);
 }

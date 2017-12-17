@@ -14,6 +14,10 @@ class CustomerRepositoryDomaImpl(
         return customerDomaDao.selectAll().map { _mapToModel(it) }
     }
 
+    override fun findById(id: Int): Customer? {
+        return customerDomaDao.selectById(id)?.let { _mapToModel(it) }
+    }
+
     private fun _mapToModel(domaEntity: CustomerDomaEntity): Customer {
         return Customer(
                 id = domaEntity.id,
