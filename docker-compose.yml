@@ -1,0 +1,8 @@
+version: "3"
+services:
+  postgres:
+    build: ./docker/postgres/
+    image: kotlin-demo-postgres
+    ports:
+      - 5432:5432
+    container_name: kotlin-demo-postgres-container
