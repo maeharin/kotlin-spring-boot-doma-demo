@@ -2,6 +2,9 @@ buildscript {
 	ext {
 		kotlinVersion = '1.1.61'
 		springBootVersion = '1.5.9.RELEASE'
+		postgresqlVersion = '42.1.4'
+		springBootDomaVersion = '1.1.1'
+		domaVersion = '2.19.0'
 	}
 	repositories {
 		mavenCentral()
@@ -32,6 +35,12 @@ repositories {
 	mavenCentral()
 }
 
+// -------------------------------------------
+// for Doma2 with gradle
+// see: http://doma.readthedocs.io/ja/stable/build/#gradle
+// -------------------------------------------
+processResources.destinationDir = compileJava.destinationDir
+compileJava.dependsOn processResources
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
@@ -40,4 +49,15 @@ dependencies {
 	compile("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
 	runtime('org.springframework.boot:spring-boot-devtools')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+
+	// -------------------------------------------
+	// postgresql
+	// -------------------------------------------
+	compile "org.postgresql:postgresql:${postgresqlVersion}"
+
+	// -------------------------------------------
+	// Doma2
+	// -------------------------------------------
+	compile "org.seasar.doma.boot:doma-spring-boot-starter:${springBootDomaVersion}"
+	compile "org.seasar.doma:doma:${domaVersion}"
 }

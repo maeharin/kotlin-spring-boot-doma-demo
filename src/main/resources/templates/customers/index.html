@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link th:href="@{/css/app.css}" rel="stylesheet" />
+</head>
+<body>
+    <h1>顧客一覧</h1>
+    <ul th:unless="${customers.isEmpty()}">
+        <li th:each="customer: ${customers}">
+            <span th:text="${customer.id}"></span>
+            <span th:text="${customer.name}"></span>
+            <span th:text="${customer.email}"></span>
+        </li>
+    </ul>
+</body>
+</html>
