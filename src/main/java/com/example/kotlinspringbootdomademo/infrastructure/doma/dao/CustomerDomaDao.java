@@ -1,7 +1,6 @@
 package com.example.kotlinspringbootdomademo.infrastructure.doma.dao;
 
 import com.example.kotlinspringbootdomademo.infrastructure.doma.entity.CustomerDomaEntity;
-import org.jetbrains.annotations.NotNull;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
