@@ -18,11 +18,25 @@ class CustomerRepositoryDomaImpl(
         return customerDomaDao.selectById(id)?.let { _mapToModel(it) }
     }
 
+    override fun create(customer: Customer): Int {
+        val domaEntity = _mapToDomaEntity(customer)
+        customerDomaDao.insert(domaEntity)
+        return domaEntity.id
+    }
+
     private fun _mapToModel(domaEntity: CustomerDomaEntity): Customer {
         return Customer(
                 id = domaEntity.id,
                 name = domaEntity.name,
                 email = domaEntity.email
         )
+    }
+
+    private fun _mapToDomaEntity(customer: Customer): CustomerDomaEntity {
+        return CustomerDomaEntity().also {
+            it.id = customer.id
+            it.name = customer.name
+            it.email = customer.email
+        }
     }
 }
