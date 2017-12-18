@@ -76,4 +76,12 @@ class CustomerController(
 
         return "redirect:/customers"
     }
+
+    @DeleteMapping("{id}")
+    fun delete(
+            @PathVariable id: Int
+    ): String {
+        customerApplicationService.delete(id)
+        return "redirect:/customers"
+    }
 }

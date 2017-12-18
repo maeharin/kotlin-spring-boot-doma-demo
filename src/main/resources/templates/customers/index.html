@@ -12,6 +12,9 @@
             <span th:text="${customer.id}"></span>
             <span th:text="${customer.name}"></span>
             <span th:text="${customer.email}"></span>
+            <form th:object="${customer}" th:action="@{/customers/__${customer.id}__}" th:method="delete">
+                <input type="submit" value="削除" />
+            </form>
         </li>
     </ul>
 </body>

@@ -39,4 +39,9 @@ class CustomerApplicationService(
 
         customerRepository.update(customer)
     }
+
+    fun delete(id: Int) {
+        val customer = customerRepository.findById(id) ?: throw RecordNotFoundException()
+        customerRepository.delete(customer)
+    }
 }

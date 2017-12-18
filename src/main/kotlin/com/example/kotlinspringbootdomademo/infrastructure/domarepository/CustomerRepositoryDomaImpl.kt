@@ -29,6 +29,11 @@ class CustomerRepositoryDomaImpl(
         customerDomaDao.update(domaEntity)
     }
 
+    override fun delete(customer: Customer) {
+        val domaEntity = _mapToDomaEntity(customer)
+        customerDomaDao.delete(domaEntity)
+    }
+
     private fun _mapToModel(domaEntity: CustomerDomaEntity): Customer {
         return Customer(
                 id = domaEntity.id,
