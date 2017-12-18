@@ -4,6 +4,7 @@ import com.example.kotlinspringbootdomademo.infrastructure.doma.entity.CustomerD
 import org.seasar.doma.Dao;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
+import org.seasar.doma.Update;
 import org.seasar.doma.boot.ConfigAutowireable;
 
 import java.util.List;
@@ -19,4 +20,7 @@ public interface CustomerDomaDao {
 
     @Insert
     int insert(CustomerDomaEntity entity);
+
+    @Update
+    int update(CustomerDomaEntity entity);
 }

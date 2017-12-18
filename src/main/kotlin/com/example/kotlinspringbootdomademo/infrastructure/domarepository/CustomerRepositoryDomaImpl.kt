@@ -24,6 +24,11 @@ class CustomerRepositoryDomaImpl(
         return domaEntity.id
     }
 
+    override fun update(customer: Customer) {
+        val domaEntity = _mapToDomaEntity(customer)
+        customerDomaDao.update(domaEntity)
+    }
+
     private fun _mapToModel(domaEntity: CustomerDomaEntity): Customer {
         return Customer(
                 id = domaEntity.id,

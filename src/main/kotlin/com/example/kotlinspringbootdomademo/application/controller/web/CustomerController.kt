@@ -1,27 +1,21 @@
 package com.example.kotlinspringbootdomademo.application.controller.web
 
-import com.example.kotlinspringbootdomademo.application.RecordNotFoundException
 import com.example.kotlinspringbootdomademo.application.input.CustomerInput
 import com.example.kotlinspringbootdomademo.application.service.CustomerApplicationService
-import com.example.kotlinspringbootdomademo.domain.repository.CustomerRepository
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.validation.annotation.Validated
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
 
 @Controller
 @RequestMapping("/customers")
 class CustomerController(
-        private val customerRepository: CustomerRepository,
         private val customerApplicationService: CustomerApplicationService
 ) {
     @GetMapping("")
     fun index(model: Model): String {
-        val customers = customerRepository.findAll()
+        val customers = customerApplicationService.findAll()
         model.addAttribute("customers", customers)
         return "customers/index"
     }
@@ -31,7 +25,7 @@ class CustomerController(
             @PathVariable id: Int,
             model: Model
     ): String {
-        val customer = customerRepository.findById(id) ?: throw RecordNotFoundException()
+        val customer = customerApplicationService.findById(id)
         model.addAttribute("customer", customer)
         return "customers/show"
     }
@@ -53,5 +47,33 @@ class CustomerController(
         val id = customerApplicationService.create(customerInput)
 
         return "redirect:/customers/${id}"
+    }
+
+    @GetMapping("{id}/edit")
+    fun edit(
+            @PathVariable id: Int,
+            customerInput: CustomerInput
+    ): String {
+        val customer = customerApplicationService.findById(id)
+
+        customerInput.name = customer.name
+        customerInput.email = customer.email
+
+        return "customers/edit"
+    }
+
+    @PatchMapping("{id}")
+    fun update(
+            @PathVariable id: Int,
+            @Validated customerInput: CustomerInput,
+            bindingResult: BindingResult
+    ): String {
+        if(bindingResult.hasErrors()) {
+            return "customers/edit"
+        }
+
+        customerApplicationService.update(id, customerInput)
+
+        return "redirect:/customers"
     }
 }
